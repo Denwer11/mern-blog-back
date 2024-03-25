@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { check, validationResult } from "express-validator";
-import User from "./models/User.js";
+import { validationResult } from "express-validator";
+import User from "../models/User.js";
 
 export const register = async (req, res) => {
   try {
