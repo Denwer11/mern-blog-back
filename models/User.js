@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
     avatarUrl: String,
   },
   {
-    tymestamps: true,
+    timestamps: true,
   }
 );
+export default mongoose.model("User", UserSchema);
