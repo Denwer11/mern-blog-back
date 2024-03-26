@@ -1,5 +1,5 @@
-# MERN Blog
-A simple blog written on the MERN stack
+# MERN Blog backend
+A simple blog written on the MERN stack (backend)
 # Technologies
   - MongoDB
   - Express
