@@ -5,6 +5,7 @@ A simple blog written on the MERN stack (backend)
   - Express
   - React JS
   - Node.js
+  
   - Multer
   - Bcrypt
   - Express-validator
