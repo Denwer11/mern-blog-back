@@ -24,7 +24,7 @@ export const getLastTags = async (req, res) => {
       .flat()
       .slice(0, 5);
 
-    res.json(posts);
+    res.json(tags);
   } catch (err) {
     res.status(500).json({ message: "Не удалось получить статьи" });
   }
