@@ -4,6 +4,7 @@ export const getAll = async (req, res) => {
   const sortBy = req.query.sortBy;
   const sortOptions = {};
   sortOptions[sortBy] = -1;
+  
   try {
     const posts = await PostModel.find()
       .populate({ path: "user", select: ["name", "avatar"] })
