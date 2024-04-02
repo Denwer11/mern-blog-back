@@ -1,9 +1,13 @@
 import PostModel from "../models/Post.js";
 
 export const getAll = async (req, res) => {
+  const sortBy = req.query.sortBy;
+  const sortOptions = {};
+  sortOptions[sortBy] = -1;
   try {
     const posts = await PostModel.find()
       .populate({ path: "user", select: ["name", "avatar"] })
+      .sort(sortOptions)
       .exec();
 
     res.json(posts);
@@ -55,7 +59,7 @@ export const getOne = async (req, res) => {
 
         res.json(doc);
       }
-    ).populate('user');
+    ).populate("user");
   } catch (err) {
     res.status(500).json({ message: "Не удалось получить статьи" });
   }
