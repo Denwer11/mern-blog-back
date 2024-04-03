@@ -4,7 +4,7 @@ export const getAll = async (req, res) => {
   const sortBy = req.query.sortBy;
   const sortOptions = {};
   sortOptions[sortBy] = -1;
-  
+
   try {
     const posts = await PostModel.find()
       .populate({ path: "user", select: ["name", "avatar"] })
@@ -30,6 +30,19 @@ export const getLastTags = async (req, res) => {
       .slice(0, 5);
 
     res.json(tags);
+  } catch (err) {
+    res.status(500).json({ message: "Не удалось получить теги" });
+  }
+};
+
+export const getPostsByTag = async (req, res) => {
+
+  try {
+    const posts = await PostModel.find({ tags: req.params.tag  })
+      .populate({ path: "user", select: ["name", "avatar"] })
+      .exec();
+
+    res.json(posts);
   } catch (err) {
     res.status(500).json({ message: "Не удалось получить статьи" });
   }
