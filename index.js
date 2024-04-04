@@ -4,9 +4,14 @@ import {
   registerValidation,
   loginValidation,
   postCreateValidation,
+  commentCreateValidation,
 } from "./validations.js";
 import { checkAuth, handleValidationErrors } from "./utils/index.js";
-import { UserController, PostController } from "./controllers/index.js";
+import {
+  UserController,
+  PostController,
+  CommentController,
+} from "./controllers/index.js";
 import multer from "multer";
 import cors from "cors";
 
@@ -58,11 +63,32 @@ app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
   });
 });
 
+app.get("/posts/:id/comments", CommentController.getCommentsByPostId);
+app.post(
+  "/posts/:id/comments",
+  checkAuth,
+  commentCreateValidation,
+  handleValidationErrors,
+  CommentController.create
+);
+app.delete(
+  "/posts/:id/comments/:commentId",
+  checkAuth,
+  handleValidationErrors,
+  CommentController.remove
+);
+app.patch(
+  "/posts/:id/comments/:commentId",
+  checkAuth,
+  commentCreateValidation,
+  handleValidationErrors,
+  CommentController.update
+);
+
 app.get("/tags", PostController.getLastTags);
 app.get("/tags/:tag", PostController.getPostsByTag);
 
 app.get("/posts", PostController.getAll);
-app.get("/posts/:id", PostController.getOne);
 app.post(
   "/posts",
   checkAuth,
